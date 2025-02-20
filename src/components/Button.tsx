@@ -18,21 +18,26 @@ const styles = tv({
       primary: "bg-orange-500 hover:bg-orange-400",
       secondary: "bg-turquoise-500 hover:bg-turquoise-400",
       neutral: "bg-steel-500 hover:bg-steel-400",
+      "dark-slate": "bg-dark-slate-600",
     },
     size: {
-      icon: "inset-shadow-md flex size-[52px] items-center justify-center rounded-xl",
-      sm: "inset-shadow-md h-[52px] rounded-xl pb-1 text-base/snug",
-      md: "inset-shadow-lg h-[67px] rounded-2xl pb-2 text-xl/normal",
+      square:
+        "inset-shadow-lg size-24 rounded-xl pb-2 md:size-[140px] md:rounded-2xl",
+      icon: "inset-shadow-md size-10 rounded-md md:size-[52px] md:rounded-xl",
+      button: [
+        "inset-shadow-md md:inset-shadow-lg h-[52px] rounded-xl px-4 pb-1 text-base/snug",
+        "md:h-[67px] md:rounded-2xl md:pb-2 md:text-xl/normal",
+      ],
     },
   },
   compoundVariants: [
     {
-      size: ["sm", "md"],
-      class: "px-4",
+      size: ["square", "icon"],
+      class: "flex items-center justify-center",
     },
   ],
   defaultVariants: {
-    size: "md",
+    size: "button",
     color: "primary",
   },
 });
