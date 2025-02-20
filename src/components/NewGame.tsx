@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Restart from "../assets/icon-restart.svg?react";
+import Switch from "./Switch";
 
 export default function NewGame() {
   return (
@@ -18,6 +19,8 @@ export default function NewGame() {
       <Button color="neutral" size="icon">
         <Restart />
       </Button>
+
+      <Switch />
     </div>
   );
 }
