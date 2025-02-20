@@ -8,61 +8,63 @@ import IconX from "../assets/icon-x.svg?react";
 import IconO from "../assets/icon-o.svg?react";
 
 import { motion } from "motion/react";
-import { tv, VariantProps } from "tailwind-variants";
+import { tv } from "tailwind-variants";
 import { focusRing } from "../utils";
 
-const styles = tv({
+const base = tv({
   extend: focusRing,
-  slots: {
-    base: "bg-dark-slate-500 relative flex h-[72px] cursor-pointer rounded-xl p-2 outline-orange-500",
-    handle: "bg-steel-500 absolute h-[54px] w-[calc(50%-8px)] rounded-xl",
-    wrapper:
-      "z-10 flex flex-1 items-center justify-center rounded-xl transition-colors duration-200",
-    icon: "scale-50",
+  base: "bg-dark-slate-500 relative flex h-[72px] cursor-pointer rounded-xl p-2 outline-orange-500",
+});
+
+const handle = tv({
+  base: "bg-steel-500 absolute h-[54px] w-[calc(50%-8px)] rounded-xl",
+  variants: {
+    isSelected: {
+      true: "right-2",
+    },
+  },
+});
+
+const wrapper = tv({
+  base: "z-10 flex flex-1 items-center justify-center rounded-xl transition-colors duration-200",
+  variants: {
+    isSelected: {
+      true: "",
+    },
+    position: {
+      left: "",
+      right: "",
+    },
   },
   compoundVariants: [
     {
-      isSelected: true,
-      class: {
-        handle: "right-2",
-      },
-    },
-    {
       isSelected: false,
       position: ["left"],
-      class: {
-        wrapper: "text-dark-slate-500 hover:bg-none",
-      },
+      class: "text-dark-slate-500 hover:bg-none",
     },
     {
       isSelected: false,
       position: ["right"],
-      class: {
-        wrapper: "hover:bg-slate-600",
-      },
+      class: "hover:bg-slate-600",
     },
     {
       isSelected: true,
       position: ["left"],
-      class: {
-        wrapper: "hover:bg-slate-600",
-      },
+      class: "hover:bg-slate-600",
     },
     {
       isSelected: true,
       position: ["right"],
-      class: {
-        wrapper: "text-dark-slate-500 hover:bg-none",
-      },
+      class: "text-dark-slate-500 hover:bg-none",
     },
   ],
 });
 
-const { base, wrapper, icon, handle } = styles();
+const icon = tv({
+  base: "scale-50",
+});
 
-type SwitchVariants = VariantProps<typeof styles>;
-
-interface SwitchProps extends AriaSwitchProps, SwitchVariants {
+interface SwitchProps extends AriaSwitchProps {
   className?: string;
 }
 
@@ -82,7 +84,7 @@ export default function Switch({ className, ...rest }: SwitchProps) {
             transition={{
               type: "spring",
               visualDuration: 0.2,
-              bounce: 0.2,
+              bounce: 0.3,
             }}
           />
           <div className={wrapper({ isSelected, position: "left" })}>
