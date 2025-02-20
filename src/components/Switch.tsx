@@ -40,22 +40,12 @@ const wrapper = tv({
     {
       isSelected: false,
       position: ["left"],
-      class: "text-dark-slate-500 hover:bg-none",
-    },
-    {
-      isSelected: false,
-      position: ["right"],
-      class: "hover:bg-slate-600",
-    },
-    {
-      isSelected: true,
-      position: ["left"],
-      class: "hover:bg-slate-600",
+      class: "text-dark-slate-500",
     },
     {
       isSelected: true,
       position: ["right"],
-      class: "text-dark-slate-500 hover:bg-none",
+      class: "text-dark-slate-500",
     },
   ],
 });
