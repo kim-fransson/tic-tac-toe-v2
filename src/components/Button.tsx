@@ -9,10 +9,10 @@ import { focusRing } from "../utils";
 
 const styles = tv({
   extend: focusRing,
-  base: "text-dark-slate-500 transition-color-transform cursor-pointer font-bold tracking-widest ease-out",
+  base: "text-dark-slate-500 cursor-pointer font-bold tracking-widest transition-(--color-transform-properties) ease-out",
   variants: {
-    isHovered: {
-      true: "transition-all duration-300", // don't want to apply transition on focus ring
+    isPressed: {
+      true: "scale-95",
     },
     color: {
       primary: "bg-orange-500 hover:bg-orange-400",
@@ -21,16 +21,11 @@ const styles = tv({
     },
     size: {
       icon: "inset-shadow-md flex size-[52px] items-center justify-center rounded-xl",
-      sm: "inset-shadow-md h-[52px] rounded-xl pb-1 text-base leading-5",
-      md: "inset-shadow-lg h-[67px] rounded-2xl pb-2 text-xl/6 leading-6",
+      sm: "inset-shadow-md h-[52px] rounded-xl pb-1 text-base/snug",
+      md: "inset-shadow-lg h-[67px] rounded-2xl pb-2 text-xl/normal",
     },
   },
   compoundVariants: [
-    {
-      isFocusVisible: false,
-      isPressed: true,
-      class: "scale-95",
-    },
     {
       size: ["sm", "md"],
       class: "px-4",
