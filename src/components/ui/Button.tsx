@@ -5,7 +5,7 @@ import {
 } from "react-aria-components";
 
 import { tv, VariantProps } from "tailwind-variants";
-import { focusRing } from "../utils";
+import { focusRing } from "../../utils";
 
 const styles = tv({
   extend: focusRing,
@@ -13,6 +13,9 @@ const styles = tv({
   variants: {
     isPressed: {
       true: "scale-95",
+    },
+    isDisabled: {
+      true: "cursor-not-allowed",
     },
     color: {
       primary: "bg-orange-500 hover:bg-orange-400",
@@ -34,6 +37,11 @@ const styles = tv({
     {
       size: ["square", "icon"],
       class: "flex items-center justify-center",
+    },
+    {
+      isDisabled: true,
+      isPressed: true,
+      class: "scale-100",
     },
   ],
   defaultVariants: {

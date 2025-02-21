@@ -1,9 +1,9 @@
-import NewGame from "./components/NewGame";
+import Game from "./Game";
 
 function App() {
   return (
-    <main>
-      <NewGame />
+    <main className="mx-auto max-w-[328px]">
+      <Game />
     </main>
   );
 }

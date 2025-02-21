@@ -9,7 +9,7 @@ import IconO from "../assets/icon-o.svg?react";
 
 import { motion } from "motion/react";
 import { tv } from "tailwind-variants";
-import { focusRing } from "../utils";
+import { focusRing } from "../../utils";
 
 const base = tv({
   extend: focusRing,
