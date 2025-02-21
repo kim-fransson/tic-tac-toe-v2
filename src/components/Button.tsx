@@ -18,7 +18,7 @@ const styles = tv({
       primary: "bg-orange-500 hover:bg-orange-400",
       secondary: "bg-turquoise-500 hover:bg-turquoise-400",
       neutral: "bg-steel-500 hover:bg-steel-400",
-      "dark-slate": "bg-dark-slate-600",
+      "dark-slate": "bg-dark-slate-400",
     },
     size: {
       square:

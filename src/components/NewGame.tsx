@@ -2,6 +2,7 @@ import Button from "./Button";
 import Restart from "../assets/icon-restart.svg?react";
 import Switch from "./Switch";
 import IconX from "../assets/icon-x.svg?react";
+import Badge from "./Badge";
 
 export default function NewGame() {
   return (
@@ -19,6 +20,17 @@ export default function NewGame() {
       </Button>
 
       <Switch />
+
+      <Badge>Shadow</Badge>
+      <Badge size="lg" noShadow color="primary">
+        Primary
+      </Badge>
+      <Badge size="lg" noShadow color="secondary">
+        Secondary
+      </Badge>
+      <Badge size="lg" noShadow color="neutral">
+        Neutral
+      </Badge>
     </div>
   );
 }

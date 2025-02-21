@@ -11,9 +11,8 @@
   --color-orange-500: oklch(0.8 0.15 78.53);
   --color-orange-400: oklch(0.86 0.14 81.15);
 
-  --color-dark-slate-600: oklch(0.3 0.03 236.34);
   --color-dark-slate-500: oklch(0.27 0.03 233.74);
-  --color-dark-slate-400: oklch(0.32 0.03 229.92);
+  --color-dark-slate-400: oklch(0.32 0.03 229.1);
 
   --color-steel-500: oklch(0.79 0.03 225.8);
   --color-steel-400: oklch(0.92 0.02 222.69);
@@ -22,8 +21,8 @@
   --radius-xl: 10px;
   --radius-md: 5px;
 
-  --inset-shadow-lg: inset 0px -8px 0px rgba(0 0 0 / 0.25);
-  --inset-shadow-md: inset 0px -4px 0px rgba(0 0 0 / 0.25);
+  --inset-shadow-lg: inset 0px -8px 0px rgba(0 0 0 / 0.35);
+  --inset-shadow-md: inset 0px -4px 0px rgba(0 0 0 / 0.35);
 
   --color-transform-properties:
     color, background-color, border-color, outline-color, text-decoration-color,
