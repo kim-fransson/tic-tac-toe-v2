@@ -51,7 +51,7 @@ const wrapper = tv({
 });
 
 const icon = tv({
-  base: "scale-50",
+  base: "size-8",
 });
 
 interface SwitchProps extends AriaSwitchProps {

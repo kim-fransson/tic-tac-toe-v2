@@ -16,7 +16,7 @@ interface SquareProps {
 }
 
 const styles = tv({
-  base: "scale-65 md:scale-100",
+  base: "size-10 md:size-16",
   variants: {
     symbol: {
       X: "text-turquoise-500",
