@@ -11,8 +11,8 @@ import { useState } from "react";
 
 interface SquareProps {
   onClick: () => void;
-  value: "X" | "O" | null;
-  player: "X" | "O";
+  value: Player | null;
+  player: Player;
 }
 
 const styles = tv({
