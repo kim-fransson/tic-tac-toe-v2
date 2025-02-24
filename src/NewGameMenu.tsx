@@ -6,9 +6,9 @@ import Button from "./components/ui/Button";
 export default function NewGameMenu() {
   const [oIsSelected, setOIsSelected] = useState(false);
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center gap-5">
+    <div className="relative translate-y-1/2 space-y-5">
       <h1 className="sr-only">New game</h1>
-      <Logo />
+      <Logo className="mx-auto" />
       <fieldset className="bg-dark-slate-400 inset-shadow-lg w-full space-y-4 rounded-2xl p-5">
         <h2 className="text-center font-bold tracking-[1px]">
           PICK PLAYER 1'S MARK
