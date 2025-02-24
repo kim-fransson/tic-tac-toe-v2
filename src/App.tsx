@@ -5,7 +5,7 @@ import NewGameMenu from "./NewGameMenu";
 function App() {
   const player1Mark = useGameStore((state) => state.player1Mark);
   return (
-    <main className="mx-auto min-h-svh max-w-[328px] py-5">
+    <main className="relative mx-auto min-h-svh max-w-[328px] py-5">
       {player1Mark ? <Game /> : <NewGameMenu />}
     </main>
   );
