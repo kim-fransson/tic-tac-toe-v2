@@ -2,7 +2,7 @@ import Badge from "./ui/Badge";
 
 interface PriceBadgeProps {
   label: string;
-  point: string;
+  point: number;
   color: "primary" | "secondary" | "neutral";
 }
 

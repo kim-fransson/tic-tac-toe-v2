@@ -9,6 +9,8 @@ import Button from "./ui/Button";
 interface GameOverModalProps extends ModalOverlayProps {
   status: Status;
   player1mark: Player;
+  onNextRound: () => void;
+  onQuit: () => void;
 }
 
 const roundResultTextStyles = tv({
@@ -24,6 +26,8 @@ const roundResultTextStyles = tv({
 export default function GameOverModal({
   status,
   player1mark,
+  onNextRound,
+  onQuit,
   ...rest
 }: GameOverModalProps) {
   const { winner } = status;
@@ -53,8 +57,12 @@ export default function GameOverModal({
       </p>
       {roundResultText}
       <div className="mt-7 space-x-4">
-        <Button color="neutral">QUIT</Button>
-        <Button color="primary">NEXT ROUND</Button>
+        <Button onPress={onQuit} color="neutral">
+          QUIT
+        </Button>
+        <Button onPress={onNextRound} color="primary">
+          NEXT ROUND
+        </Button>
       </div>
     </Modal>
   );

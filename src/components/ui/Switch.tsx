@@ -4,8 +4,8 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import IconX from "../assets/icon-x.svg?react";
-import IconO from "../assets/icon-o.svg?react";
+import IconX from "../../assets/icon-x.svg?react";
+import IconO from "../../assets/icon-o.svg?react";
 
 import { motion } from "motion/react";
 import { tv } from "tailwind-variants";
