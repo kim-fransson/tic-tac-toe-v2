@@ -13,7 +13,7 @@ import { focusRing } from "../../utils";
 
 const base = tv({
   extend: focusRing,
-  base: "bg-dark-slate-500 relative flex h-[72px] cursor-pointer rounded-xl p-2 outline-orange-500",
+  base: "bg-dark-slate-500 relative flex h-[72px] cursor-pointer rounded-xl p-2",
 });
 
 const handle = tv({

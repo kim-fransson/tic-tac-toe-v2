@@ -2,9 +2,16 @@ import { useState } from "react";
 import Logo from "./assets/logo.svg?react";
 import Switch from "./components/ui/Switch";
 import Button from "./components/ui/Button";
+import { useGameStore } from "./hooks";
 
 export default function NewGameMenu() {
   const [oIsSelected, setOIsSelected] = useState(false);
+  const setPlayer1Mark = useGameStore((state) => state.setPlayer1Mark);
+
+  function handleNewGameAgainstPlayer() {
+    setPlayer1Mark(oIsSelected ? "O" : "X");
+  }
+
   return (
     <div className="absolute top-1/2 -translate-y-1/2 space-y-5">
       <h1 className="sr-only">New game</h1>
@@ -23,7 +30,11 @@ export default function NewGameMenu() {
         </small>
       </fieldset>
       <Button className="w-full">NEW GAME (VS CPU)</Button>
-      <Button className="w-full" color="secondary">
+      <Button
+        onPress={handleNewGameAgainstPlayer}
+        className="w-full"
+        color="secondary"
+      >
         NEW GAME (VS PLAYER)
       </Button>
     </div>
