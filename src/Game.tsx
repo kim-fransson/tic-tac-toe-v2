@@ -115,6 +115,7 @@ export default function Game() {
         player={player}
         squares={currentSquares}
         onPlay={handlePlay}
+        isDisabled={showGameOverModal || showRestartGameModal}
       />
       <div className="mt-5 grid grid-cols-3 gap-5">
         <PointBadge

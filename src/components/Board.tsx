@@ -7,16 +7,18 @@ interface BoardProps {
   squares: Squares;
   onPlay: (nextSquares: Squares) => void;
   className?: string;
+  isDisabled?: boolean;
 }
 
 export default function Board({
   player,
   squares,
   onPlay,
+  isDisabled,
   className,
 }: BoardProps) {
   function handleClick(i: number) {
-    if (squares[i]) {
+    if (squares[i] || isDisabled) {
       return;
     }
 
