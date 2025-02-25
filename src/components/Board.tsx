@@ -18,7 +18,7 @@ export default function Board({
   className,
 }: BoardProps) {
   function handleClick(i: number) {
-    if (squares[i] || isDisabled) {
+    if (squares[i]) {
       return;
     }
 
@@ -37,6 +37,7 @@ export default function Board({
             value={square}
             player={player}
             onClick={() => handleClick(squareIndex)}
+            isDisabled={isDisabled}
           />
         ))}
       </div>

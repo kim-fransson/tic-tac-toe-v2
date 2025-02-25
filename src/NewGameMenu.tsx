@@ -7,9 +7,15 @@ import { useGameStore } from "./hooks";
 export default function NewGameMenu() {
   const [oIsSelected, setOIsSelected] = useState(false);
   const setPlayer1Mark = useGameStore((state) => state.setPlayer1Mark);
+  const setIsPlayer2CPU = useGameStore((state) => state.setIsPlayer2CPU);
 
   function handleNewGameAgainstPlayer() {
     setPlayer1Mark(oIsSelected ? "O" : "X");
+  }
+
+  function handleNewGameAgainstCPU() {
+    setPlayer1Mark(oIsSelected ? "O" : "X");
+    setIsPlayer2CPU(true);
   }
 
   return (
@@ -29,7 +35,9 @@ export default function NewGameMenu() {
           REMEMBER: X GOES FIRST
         </small>
       </fieldset>
-      <Button className="w-full">NEW GAME (VS CPU)</Button>
+      <Button onPress={handleNewGameAgainstCPU} className="w-full">
+        NEW GAME (VS CPU)
+      </Button>
       <Button
         onPress={handleNewGameAgainstPlayer}
         className="w-full"

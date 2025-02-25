@@ -7,7 +7,7 @@ import { tv } from "tailwind-variants";
 import Button from "./ui/Button";
 
 interface GameOverModalProps extends ModalOverlayProps {
-  status: Status;
+  winner: Player | null;
   player1mark: Player;
   onNextRound: () => void;
   onQuit: () => void;
@@ -27,14 +27,12 @@ const roundResultTextStyles = tv({
 });
 
 export default function GameOverModal({
-  status,
+  winner,
   player1mark,
   onNextRound,
   onQuit,
   ...rest
 }: GameOverModalProps) {
-  const { winner } = status;
-
   let winnerText;
   let roundResultText: React.ReactNode;
   if (winner) {

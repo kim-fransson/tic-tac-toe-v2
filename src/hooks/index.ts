@@ -6,10 +6,10 @@ const defaultState = {
   currentMove: 0,
   xIsNext: true,
   player1Mark: null as Player | null,
+  isPlayer2CPU: false,
   xWins: 0,
   oWins: 0,
   ties: 0,
-  status: {} as Status,
 };
 
 interface GameState {
@@ -17,10 +17,10 @@ interface GameState {
   currentMove: number;
   xIsNext: boolean;
   player1Mark: Player | null;
+  isPlayer2CPU: boolean;
   xWins: number;
   oWins: number;
   ties: number;
-  status: Status;
 
   setHistory: (history: Squares[] | ((prev: Squares[]) => Squares[])) => void;
   setCurrentMove: (currentMove: number | ((prev: number) => number)) => void;
@@ -28,10 +28,12 @@ interface GameState {
   setPlayer1Mark: (
     player1Mark: Player | null | ((prev: Player | null) => Player | null),
   ) => void;
+  setIsPlayer2CPU: (
+    isPlayer2CPU: boolean | ((prev: boolean) => boolean),
+  ) => void;
   setXWins: (xWins: number | ((prev: number) => number)) => void;
   setOWins: (oWins: number | ((prev: number) => number)) => void;
   setTies: (ties: number | ((prev: number) => number)) => void;
-  setStatus: (status: Status | ((prev: Status) => Status)) => void;
 
   newGame: () => void;
   endGame: () => void;
@@ -64,6 +66,13 @@ export const useGameStore = create<GameState>(
             ? player1Mark(state.player1Mark)
             : player1Mark,
       })),
+    setIsPlayer2CPU: (isPlayer2CPU) =>
+      set((state) => ({
+        isPlayer2CPU:
+          typeof isPlayer2CPU === "function"
+            ? isPlayer2CPU(state.isPlayer2CPU)
+            : isPlayer2CPU,
+      })),
     setXWins: (xWins) =>
       set((state) => ({
         xWins: typeof xWins === "function" ? xWins(state.xWins) : xWins,
@@ -76,13 +85,10 @@ export const useGameStore = create<GameState>(
       set((state) => ({
         ties: typeof ties === "function" ? ties(state.ties) : ties,
       })),
-    setStatus: (status) =>
-      set((state) => ({
-        status: typeof status === "function" ? status(state.status) : status,
-      })),
     newGame: () =>
       set((state) => ({
         ...defaultState,
+        isPlayer2CPU: state.isPlayer2CPU,
         xWins: state.xWins,
         oWins: state.oWins,
         ties: state.ties,
@@ -93,6 +99,7 @@ export const useGameStore = create<GameState>(
     restartGame: () =>
       set((state) => ({
         ...defaultState,
+        isPlayer2CPU: state.isPlayer2CPU,
         xWins: state.xWins,
         oWins: state.oWins,
         ties: state.ties,

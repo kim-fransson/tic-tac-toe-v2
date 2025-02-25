@@ -36,16 +36,6 @@ export function calculateTurns(squares: Squares) {
   return squares.filter((square) => !square).length;
 }
 
-export function calculateStatus(
-  winner: Player | null,
-  turns: number,
-  player: Player,
-): Status {
-  if (!winner && !turns) return { isDraw: true, winner: null, loser: null };
-  if (winner) return { isDraw: false, winner, loser: player };
-  return { isDraw: false, winner: null, loser: null };
-}
-
 export function getNumpadKey(index: number): string | null {
   const numpadMap = [
     "Numpad7",
@@ -60,4 +50,58 @@ export function getNumpadKey(index: number): string | null {
   ];
 
   return numpadMap[index] ?? null;
+}
+
+function getAvailableMoves(board: Squares): number[] {
+  return board
+    .map((square, index) => (square === null ? index : null))
+    .filter((index) => index !== null) as number[];
+}
+
+function score(player: Player, depth: number, winner: Player | null): number {
+  const opponent = player === "X" ? "O" : "X";
+  if (winner === player) {
+    return 10 - depth;
+  } else if (winner === opponent) {
+    return depth - 10;
+  } else {
+    return 0;
+  }
+}
+
+function minimax(
+  board: Squares,
+  player: Player,
+  depth: number,
+): { move: number | null; score: number } {
+  const winner = calculateWinner(board);
+  const turns = calculateTurns(board);
+
+  if (winner !== null || turns === 0) {
+    return { move: null, score: score(player, depth, winner) };
+  }
+
+  let bestMove: number | null = null;
+  let bestScore = player === "X" ? -Infinity : Infinity;
+  const opponent = player === "X" ? "O" : "X";
+
+  getAvailableMoves(board).forEach((move) => {
+    const newBoard = [...board];
+    newBoard[move] = player;
+    const { score: moveScore } = minimax(newBoard, opponent, depth + 1);
+
+    if (
+      (player === "X" && moveScore > bestScore) ||
+      (player === "O" && moveScore < bestScore)
+    ) {
+      bestScore = moveScore;
+      bestMove = move;
+    }
+  });
+
+  return { move: bestMove, score: bestScore };
+}
+
+export function makeDecision(board: Squares, cpu: Player): number {
+  return minimax(board, cpu, 0).move!;
 }

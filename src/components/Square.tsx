@@ -17,6 +17,7 @@ interface SquareProps {
   value: Player | null;
   player: Player;
   index: number;
+  isDisabled?: boolean;
 }
 
 const styles = tv({
@@ -52,7 +53,13 @@ const motionVariants = {
   },
 };
 
-export default function Square({ onClick, value, player, index }: SquareProps) {
+export default function Square({
+  onClick,
+  value,
+  player,
+  index,
+  isDisabled,
+}: SquareProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   useHotkeys<HTMLButtonElement>(getNumpadKey(index) as string, () => onClick());
@@ -66,7 +73,7 @@ export default function Square({ onClick, value, player, index }: SquareProps) {
       color="dark-slate"
       size="square"
       onHoverChange={setIsHovered}
-      isDisabled={value !== null}
+      isDisabled={value !== null || isDisabled}
     >
       <AnimatePresence>
         {ValueIcon && (
