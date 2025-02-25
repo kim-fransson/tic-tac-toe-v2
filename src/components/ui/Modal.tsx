@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
+import { FocusScope } from "react-aria";
 import {
   Modal as AriaModal,
   ModalOverlay,
@@ -28,14 +29,16 @@ export default function Modal(props: ModalOverlayProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <MotionModal
-            className={modalStyles}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {props.children}
-          </MotionModal>
+          <FocusScope autoFocus contain>
+            <MotionModal
+              className={modalStyles}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {props.children}
+            </MotionModal>
+          </FocusScope>
         </MotionModalOverlay>
       )}
     </AnimatePresence>

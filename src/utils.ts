@@ -45,3 +45,19 @@ export function calculateStatus(
   if (winner) return { isDraw: false, winner, loser: player };
   return { isDraw: false, winner: null, loser: null };
 }
+
+export function getNumpadKey(index: number): string | null {
+  const numpadMap = [
+    "Numpad7",
+    "Numpad8",
+    "Numpad9",
+    "Numpad4",
+    "Numpad5",
+    "Numpad6",
+    "Numpad1",
+    "Numpad2",
+    "Numpad3",
+  ];
+
+  return numpadMap[index] ?? null;
+}

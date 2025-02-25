@@ -1,4 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useHotkeys } from "react-hotkeys-hook";
+
 import Button from "./ui/Button";
 
 import XIcon from "../assets/icon-x.svg?react";
@@ -8,11 +10,13 @@ import OOutlineIcon from "../assets/icon-o-outline.svg?react";
 
 import { tv } from "tailwind-variants";
 import { useState } from "react";
+import { getNumpadKey } from "../utils";
 
 interface SquareProps {
   onClick: () => void;
   value: Player | null;
   player: Player;
+  index: number;
 }
 
 const styles = tv({
@@ -48,8 +52,10 @@ const motionVariants = {
   },
 };
 
-export default function Square({ onClick, value, player }: SquareProps) {
+export default function Square({ onClick, value, player, index }: SquareProps) {
   const [isHovered, setIsHovered] = useState(false);
+
+  useHotkeys<HTMLButtonElement>(getNumpadKey(index) as string, () => onClick());
 
   const ValueIcon = value ? iconMap[value] : null;
   const HoverIcon = !value && isHovered ? iconMap[`${player}Outline`] : null;

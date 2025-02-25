@@ -31,6 +31,7 @@ export default function Board({
         {squares.map((square, squareIndex) => (
           <Square
             key={squareIndex}
+            index={squareIndex}
             value={square}
             player={player}
             onClick={() => handleClick(squareIndex)}
