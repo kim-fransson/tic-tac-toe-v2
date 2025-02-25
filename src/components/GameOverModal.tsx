@@ -14,7 +14,10 @@ interface GameOverModalProps extends ModalOverlayProps {
 }
 
 const roundResultTextStyles = tv({
-  base: "text-steel-500 mt-4 flex items-center gap-2 text-center text-2xl leading-8 font-bold tracking-[1.5px]",
+  base: [
+    "text-steel-500 mt-4 flex items-center gap-2 text-center text-2xl leading-8 font-bold tracking-[1.5px]",
+    "md:gap-5 md:text-5xl md:leading-12 md:tracking-[2.5px]",
+  ],
   variants: {
     winner: {
       O: "text-orange-500",
@@ -39,9 +42,9 @@ export default function GameOverModal({
     roundResultText = (
       <h2 className={roundResultTextStyles({ winner })}>
         {winner === "X" ? (
-          <XIcon className="size-8" />
+          <XIcon className="size-8 md:size-16" />
         ) : (
-          <OIcon className="size-8" />
+          <OIcon className="size-8 md:size-16" />
         )}{" "}
         TAKES THE ROUND
       </h2>
@@ -52,7 +55,7 @@ export default function GameOverModal({
   }
   return (
     <Modal {...rest}>
-      <p className="text-center text-sm leading-5 font-bold tracking-[0.875px]">
+      <p className="text-center text-sm leading-5 font-bold tracking-[0.875px] md:text-base md:tracking-[1px]">
         {winnerText}
       </p>
       {roundResultText}

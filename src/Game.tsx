@@ -85,7 +85,7 @@ export default function Game() {
   }
 
   return (
-    <>
+    <div className="absolute md:top-1/2 md:-translate-y-1/2">
       <GameOverModal
         isOpen={showGameOverModal}
         status={status}
@@ -110,7 +110,12 @@ export default function Game() {
           <ResetIcon />
         </Button>
       </header>
-      <Board player={player} squares={currentSquares} onPlay={handlePlay} />
+      <Board
+        className="mt-16 md:mt-5"
+        player={player}
+        squares={currentSquares}
+        onPlay={handlePlay}
+      />
       <div className="mt-5 grid grid-cols-3 gap-5">
         <PointBadge
           color="secondary"
@@ -124,6 +129,6 @@ export default function Game() {
           point={oWins}
         />
       </div>
-    </>
+    </div>
   );
 }

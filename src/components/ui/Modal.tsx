@@ -11,7 +11,7 @@ const overlayStyles = tv({
 });
 
 const modalStyles = tv({
-  base: "bg-dark-slate-500 flex min-h-[228px] w-full flex-col items-center justify-center",
+  base: "bg-dark-slate-500 flex min-h-[228px] w-full flex-col items-center justify-center md:min-h-[266px]",
 });
 
 const MotionModalOverlay = motion.create(ModalOverlay);

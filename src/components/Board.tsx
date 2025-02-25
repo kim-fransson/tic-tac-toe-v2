@@ -1,12 +1,20 @@
+import { tv } from "tailwind-variants";
 import Square from "./Square";
 
+const styles = tv({ base: "grid grid-cols-3 gap-5" });
 interface BoardProps {
   player: Player;
   squares: Squares;
   onPlay: (nextSquares: Squares) => void;
+  className?: string;
 }
 
-export default function Board({ player, squares, onPlay }: BoardProps) {
+export default function Board({
+  player,
+  squares,
+  onPlay,
+  className,
+}: BoardProps) {
   function handleClick(i: number) {
     if (squares[i]) {
       return;
@@ -19,7 +27,7 @@ export default function Board({ player, squares, onPlay }: BoardProps) {
 
   return (
     <>
-      <div className="mt-16 grid grid-cols-3 gap-5">
+      <div className={styles({ className })}>
         {squares.map((square, squareIndex) => (
           <Square
             key={squareIndex}

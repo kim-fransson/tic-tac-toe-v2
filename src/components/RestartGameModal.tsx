@@ -15,7 +15,7 @@ export default function RestartGameModal({
 }: RestartGameModalProps) {
   return (
     <Modal {...rest}>
-      <h2 className="text-steel-500 text-center text-2xl leading-8 font-bold tracking-[1.5px]">
+      <h2 className="text-steel-500 text-center text-2xl leading-8 font-bold tracking-[1.5px] md:text-5xl md:leading-12 md:tracking-[2.5px]">
         RESTART GAME?
       </h2>
       <div className="mt-7 space-x-4">
