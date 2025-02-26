@@ -109,6 +109,7 @@ export default function Game() {
         isOpen={showGameOverModal}
         winner={winner}
         player1mark={player1Mark as Player}
+        isPlayer2CPU={isPlayer2CPU}
         onNextRound={handleNextGame}
         onQuit={handleEndGame}
       />

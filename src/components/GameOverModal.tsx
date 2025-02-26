@@ -9,6 +9,7 @@ import Button from "./ui/Button";
 interface GameOverModalProps extends ModalOverlayProps {
   winner: Player | null;
   player1mark: Player;
+  isPlayer2CPU: boolean;
   onNextRound: () => void;
   onQuit: () => void;
 }
@@ -31,12 +32,18 @@ export default function GameOverModal({
   player1mark,
   onNextRound,
   onQuit,
+  isPlayer2CPU,
   ...rest
 }: GameOverModalProps) {
   let winnerText;
   let roundResultText: React.ReactNode;
   if (winner) {
-    winnerText = winner === player1mark ? "PLAYER 1 WINS!" : "PLAYER 2 WINS";
+    winnerText =
+      winner === player1mark
+        ? "PLAYER 1 WINS!"
+        : isPlayer2CPU
+          ? "COMPUTER WINS"
+          : "PLAYER 2 WINS";
     roundResultText = (
       <h2 className={roundResultTextStyles({ winner })}>
         {winner === "X" ? (

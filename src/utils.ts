@@ -58,50 +58,69 @@ function getAvailableMoves(board: Squares): number[] {
     .filter((index) => index !== null) as number[];
 }
 
-function score(player: Player, depth: number, winner: Player | null): number {
-  const opponent = player === "X" ? "O" : "X";
+function calculateScore(
+  player: Player,
+  opponent: Player,
+  winner: Player | null,
+  depth: number,
+) {
   if (winner === player) {
     return 10 - depth;
-  } else if (winner === opponent) {
-    return depth - 10;
-  } else {
-    return 0;
   }
+  if (winner === opponent) {
+    return depth - 10;
+  }
+
+  return 0;
 }
 
 function minimax(
   board: Squares,
+  currentPlayer: Player,
   player: Player,
-  depth: number,
-): { move: number | null; score: number } {
-  const winner = calculateWinner(board);
+  opponent: Player,
+  depth = 0,
+) {
   const turns = calculateTurns(board);
-
-  if (winner !== null || turns === 0) {
-    return { move: null, score: score(player, depth, winner) };
+  const winner = calculateWinner(board);
+  const isGameOver = winner || turns === 0;
+  if (isGameOver) {
+    return { score: calculateScore(player, opponent, winner, depth), move: -1 };
   }
 
-  let bestMove: number | null = null;
-  let bestScore = player === "X" ? -Infinity : Infinity;
-  const opponent = player === "X" ? "O" : "X";
+  let bestMove = -1;
+  let bestScore = currentPlayer === player ? -Infinity : Infinity;
 
   getAvailableMoves(board).forEach((move) => {
     const newBoard = [...board];
-    newBoard[move] = player;
-    const { score: moveScore } = minimax(newBoard, opponent, depth + 1);
+    newBoard[move] = currentPlayer;
 
-    if (
-      (player === "X" && moveScore > bestScore) ||
-      (player === "O" && moveScore < bestScore)
-    ) {
-      bestScore = moveScore;
-      bestMove = move;
+    const res = minimax(
+      newBoard,
+      currentPlayer === "X" ? "O" : "X",
+      player,
+      opponent,
+      depth + 1,
+    );
+
+    if (currentPlayer === player) {
+      // Maximizing player
+      if (res.score > bestScore) {
+        bestScore = res.score;
+        bestMove = move;
+      }
+    } else {
+      // Minimizing opponent
+      if (res.score < bestScore) {
+        bestScore = res.score;
+        bestMove = move;
+      }
     }
   });
 
-  return { move: bestMove, score: bestScore };
+  return { score: bestScore, move: bestMove };
 }
 
-export function makeDecision(board: Squares, cpu: Player): number {
-  return minimax(board, cpu, 0).move!;
+export function makeDecision(board: Squares, player: Player): number {
+  return minimax(board, player, player, player === "X" ? "O" : "X").move;
 }
