@@ -58,6 +58,10 @@ function getAvailableMoves(board: Squares): number[] {
     .filter((index) => index !== null) as number[];
 }
 
+function isAccurate(sloppiness: number) {
+  return Math.random() >= sloppiness;
+}
+
 function calculateScore(
   player: Player,
   opponent: Player,
@@ -79,6 +83,7 @@ function minimax(
   currentPlayer: Player,
   player: Player,
   opponent: Player,
+  sloppiness = 0 as SloppinessLevel,
   depth = 0,
 ) {
   const turns = calculateTurns(board);
@@ -100,18 +105,21 @@ function minimax(
       currentPlayer === "X" ? "O" : "X",
       player,
       opponent,
+      sloppiness,
       depth + 1,
     );
 
+    const shouldNotMakeMistake = isAccurate(sloppiness) || bestMove === -1;
+
     if (currentPlayer === player) {
       // Maximizing player
-      if (res.score > bestScore) {
+      if (res.score > bestScore && shouldNotMakeMistake) {
         bestScore = res.score;
         bestMove = move;
       }
     } else {
       // Minimizing opponent
-      if (res.score < bestScore) {
+      if (res.score < bestScore && shouldNotMakeMistake) {
         bestScore = res.score;
         bestMove = move;
       }
@@ -121,6 +129,30 @@ function minimax(
   return { score: bestScore, move: bestMove };
 }
 
+export const sloppinessDescriptions: Record<
+  SloppinessLevel,
+  { label: string; description: string }
+> = {
+  0: {
+    label: "Tic-Tac-Terminator",
+    description:
+      "It doesn't feel pity, or remorse, or fear... and it absolutely will not lose.",
+  },
+  0.25: {
+    label: "Absent-Minded Genius",
+    description: "Mostly sharp, but occasionally spaces out.",
+  },
+  0.5: {
+    label: "Coin Flipper",
+    description: "Sometimes smart, sometimes dumb... who knows?",
+  },
+  0.75: {
+    label: "Goldfish Brain",
+    description: "Forgets what it's doing mid-game.",
+  },
+  1: { label: "Idiot", description: "Thinks Tic-Tac-Toe is Connect Four." },
+};
+
 export function makeDecision(board: Squares, player: Player): number {
-  return minimax(board, player, player, player === "X" ? "O" : "X").move;
+  return minimax(board, player, player, player === "X" ? "O" : "X", 0).move;
 }
