@@ -83,13 +83,14 @@ function minimax(
   currentPlayer: Player,
   player: Player,
   opponent: Player,
-  sloppiness = 0 as SloppinessLevel,
   depth = 0,
+  sloppiness = 0,
+  maxDepth = Infinity,
 ) {
   const turns = calculateTurns(board);
   const winner = calculateWinner(board);
   const isGameOver = winner || turns === 0;
-  if (isGameOver) {
+  if (isGameOver || depth === maxDepth) {
     return { score: calculateScore(player, opponent, winner, depth), move: -1 };
   }
 
@@ -105,8 +106,9 @@ function minimax(
       currentPlayer === "X" ? "O" : "X",
       player,
       opponent,
-      sloppiness,
       depth + 1,
+      sloppiness,
+      maxDepth,
     );
 
     const shouldNotMakeMistake = isAccurate(sloppiness) || bestMove === -1;
@@ -129,30 +131,52 @@ function minimax(
   return { score: bestScore, move: bestMove };
 }
 
-export const sloppinessDescriptions: Record<
-  SloppinessLevel,
-  { label: string; description: string }
-> = {
+export const difficultyLevels: Record<0 | 1 | 2 | 3 | 4, Difficulty> = {
   0: {
+    sloppiness: 0,
+    label: "Pure Chaos",
+    description: "Clicks buttons at random. Strategy is a foreign concept.",
+    maxDepth: 0, // Pure random moves
+  },
+  1: {
+    sloppiness: 0,
+    label: "Idiot",
+    description: "Thinks Tic-Tac-Toe is Connect Four.",
+    maxDepth: 2,
+  },
+  2: {
+    sloppiness: 0.2,
+    label: "Coin Flipper",
+    description: "Sometimes smart, sometimes dumb... who knows?",
+    maxDepth: Infinity,
+  },
+  3: {
+    sloppiness: 0.02,
+    label: "Absent-Minded Genius",
+    description: "Mostly sharp, but occasionally spaces out.",
+    maxDepth: Infinity,
+  },
+  4: {
+    sloppiness: 0,
     label: "Tic-Tac-Terminator",
     description:
       "It doesn't feel pity, or remorse, or fear... and it absolutely will not lose.",
+    maxDepth: Infinity,
   },
-  0.25: {
-    label: "Absent-Minded Genius",
-    description: "Mostly sharp, but occasionally spaces out.",
-  },
-  0.5: {
-    label: "Coin Flipper",
-    description: "Sometimes smart, sometimes dumb... who knows?",
-  },
-  0.75: {
-    label: "Goldfish Brain",
-    description: "Forgets what it's doing mid-game.",
-  },
-  1: { label: "Idiot", description: "Thinks Tic-Tac-Toe is Connect Four." },
 };
 
-export function makeDecision(board: Squares, player: Player): number {
-  return minimax(board, player, player, player === "X" ? "O" : "X", 0).move;
+export function makeDecision(
+  board: Squares,
+  player: Player,
+  difficulty = difficultyLevels[4],
+): number {
+  return minimax(
+    board,
+    player,
+    player,
+    player === "X" ? "O" : "X",
+    0,
+    difficulty.sloppiness,
+    difficulty.maxDepth,
+  ).move;
 }

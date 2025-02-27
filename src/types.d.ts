@@ -11,4 +11,9 @@ type GameSettings = {
   player1Mark: Player;
 };
 
-type SloppinessLevel = 0 | 0.25 | 0.5 | 0.75 | 1;
+type Difficulty = {
+  sloppiness: number;
+  label: string;
+  description: string;
+  maxDepth: number;
+};
