@@ -1,6 +1,6 @@
-import Game from "./Game";
 import { useGameStore } from "./hooks";
-import NewGameMenu from "./NewGameMenu";
+import NewGameMenu from "./components/NewGameMenu";
+import Game from "./components/Game";
 
 function App() {
   const player1Mark = useGameStore((state) => state.player1Mark);

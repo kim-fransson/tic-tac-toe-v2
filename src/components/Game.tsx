@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Board from "./components/Board";
-import { useGameStore } from "./hooks";
+import Board from "../components/Board";
+import { useGameStore } from "../hooks";
 
-import Logo from "./assets/logo.svg?react";
-import ResetIcon from "./assets/icon-restart.svg?react";
-import TurnBadge from "./components/TurnBadge";
-import Button from "./components/ui/Button";
-import PointBadge from "./components/PointBadge";
-import { calculateTurns, calculateWinner, makeDecision } from "./utils";
-import GameOverModal from "./components/GameOverModal";
+import Logo from "../assets/logo.svg?react";
+import ResetIcon from "../assets/icon-restart.svg?react";
+import TurnBadge from "../components/TurnBadge";
+import Button from "../components/ui/Button";
+import PointBadge from "../components/PointBadge";
+import { calculateTurns, calculateWinner, makeDecision } from "../utils";
+import GameOverModal from "../components/GameOverModal";
 import { useEffect, useState } from "react";
-import RestartGameModal from "./components/RestartGameModal";
+import RestartGameModal from "../components/RestartGameModal";
 
 export default function Game() {
   const history = useGameStore((state) => state.history);
