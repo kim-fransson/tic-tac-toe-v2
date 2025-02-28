@@ -1,4 +1,7 @@
 import { ModalOverlayProps } from "react-aria-components";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
+
 import Modal from "./ui/Modal";
 
 import XIcon from "../assets/icon-x.svg?react";
@@ -37,6 +40,13 @@ export default function GameOverModal({
 }: GameOverModalProps) {
   let winnerText;
   let roundResultText: React.ReactNode;
+  const { width, height } = useWindowSize();
+
+  console.log({
+    width,
+    height,
+  });
+
   if (winner) {
     winnerText =
       winner === player1mark
@@ -60,6 +70,9 @@ export default function GameOverModal({
   }
   return (
     <Modal {...rest}>
+      {isPlayer2CPU && player1mark === winner && (
+        <Confetti width={width} height={height} />
+      )}
       <p className="text-center text-sm leading-5 font-bold tracking-[0.875px] md:text-base md:tracking-[1px]">
         {winnerText}
       </p>
