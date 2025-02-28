@@ -70,7 +70,8 @@ export default function GameOverModal({
   }
   return (
     <Modal {...rest}>
-      {isPlayer2CPU && player1mark === winner && (
+      {((isPlayer2CPU && player1mark === winner) ||
+        (winner && !isPlayer2CPU)) && (
         <Confetti width={width} height={height} />
       )}
       <p className="text-center text-sm leading-5 font-bold tracking-[0.875px] md:text-base md:tracking-[1px]">
