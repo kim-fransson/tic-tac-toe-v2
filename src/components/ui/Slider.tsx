@@ -45,7 +45,7 @@ export default function Slider({ className, label, ...rest }: SliderProps) {
 
               {/* thumb with animation */}
               <MotionSliderThumb
-                className="border-dark-slate-500 bg-steel-500 absolute top-[50%] size-5 rounded-full border-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-transparent"
+                className="border-dark-slate-500 bg-steel-500 absolute top-[50%] size-7 rounded-full border-2 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-transparent md:size-5"
                 animate={{ left: `${thumbPercent}%` }}
                 transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
               />
