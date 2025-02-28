@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { combine, persist } from "zustand/middleware";
+import { difficultyLevels } from "../utils";
 
 const defaultState = {
   history: [Array(9).fill(null)],
@@ -10,6 +11,7 @@ const defaultState = {
   xWins: 0,
   oWins: 0,
   ties: 0,
+  difficulty: difficultyLevels[2],
 };
 
 interface GameState {
@@ -21,6 +23,7 @@ interface GameState {
   xWins: number;
   oWins: number;
   ties: number;
+  difficulty: Difficulty;
 
   setHistory: (history: Squares[] | ((prev: Squares[]) => Squares[])) => void;
   setCurrentMove: (currentMove: number | ((prev: number) => number)) => void;
@@ -34,6 +37,9 @@ interface GameState {
   setXWins: (xWins: number | ((prev: number) => number)) => void;
   setOWins: (oWins: number | ((prev: number) => number)) => void;
   setTies: (ties: number | ((prev: number) => number)) => void;
+  setDifficulty: (
+    difficulty: Difficulty | ((prev: Difficulty) => Difficulty),
+  ) => void;
 
   newGame: () => void;
   endGame: () => void;
@@ -86,9 +92,17 @@ export const useGameStore = create<GameState>()(
         set((state) => ({
           ties: typeof ties === "function" ? ties(state.ties) : ties,
         })),
+      setDifficulty: (difficulty) =>
+        set((state) => ({
+          difficulty:
+            typeof difficulty === "function"
+              ? difficulty(state.difficulty)
+              : difficulty,
+        })),
       newGame: () =>
         set((state) => ({
           ...defaultState,
+          difficulty: state.difficulty,
           isPlayer2CPU: state.isPlayer2CPU,
           xWins: state.xWins,
           oWins: state.oWins,
@@ -100,6 +114,7 @@ export const useGameStore = create<GameState>()(
       restartGame: () =>
         set((state) => ({
           ...defaultState,
+          difficulty: state.difficulty,
           isPlayer2CPU: state.isPlayer2CPU,
           xWins: state.xWins,
           oWins: state.oWins,

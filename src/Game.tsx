@@ -30,6 +30,7 @@ export default function Game() {
   const endGame = useGameStore((state) => state.endGame);
   const restartGame = useGameStore((state) => state.restartGame);
   const isPlayer2CPU = useGameStore((state) => state.isPlayer2CPU);
+  const difficulty = useGameStore((state) => state.difficulty);
 
   const [showGameOverModal, setShowGameOverModal] = useState(false);
   const [showRestartGameModal, setShowRestartGameModal] = useState(false);
@@ -90,7 +91,7 @@ export default function Game() {
 
   function handleCPUPlay() {
     setIsCPUThinking(true);
-    const decision = makeDecision(currentSquares, currentPlayer);
+    const decision = makeDecision(currentSquares, currentPlayer, difficulty);
     const nextSquares = currentSquares.slice();
     nextSquares[decision] = currentPlayer;
     handlePlay(nextSquares);

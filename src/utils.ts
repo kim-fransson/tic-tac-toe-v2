@@ -131,46 +131,46 @@ function minimax(
   return { score: bestScore, move: bestMove };
 }
 
-export const difficultyLevels: Record<0 | 1 | 2 | 3 | 4, Difficulty> = {
-  0: {
+export const difficultyLevels: Difficulty[] = [
+  {
     sloppiness: 0,
     label: "Pure Chaos",
-    description: "Clicks buttons at random. Strategy is a foreign concept.",
+    description: "Strategizing? Never heard of it.",
     maxDepth: 0, // Pure random moves
   },
-  1: {
+  {
     sloppiness: 0,
     label: "Idiot",
     description: "Thinks Tic-Tac-Toe is Connect Four.",
-    maxDepth: 2,
+    maxDepth: 1,
   },
-  2: {
+  {
     sloppiness: 0.2,
     label: "Coin Flipper",
     description: "Sometimes smart, sometimes dumb... who knows?",
     maxDepth: Infinity,
   },
-  3: {
+  {
     sloppiness: 0.02,
     label: "Absent-Minded Genius",
     description: "Mostly sharp, but occasionally spaces out.",
     maxDepth: Infinity,
   },
-  4: {
+  {
     sloppiness: 0,
     label: "Tic-Tac-Terminator",
-    description:
-      "It doesn't feel pity, or remorse, or fear... and it absolutely will not lose.",
+    description: "You will never win... but hey, miracles happen.",
     maxDepth: Infinity,
   },
-};
+];
 
 export function makeDecision(
   board: Squares,
   player: Player,
   difficulty = difficultyLevels[4],
 ): number {
-  return minimax(
+  console.log({ difficulty: difficulty.label });
+  let move = minimax(
     board,
     player,
     player,
@@ -179,4 +179,12 @@ export function makeDecision(
     difficulty.sloppiness,
     difficulty.maxDepth,
   ).move;
+
+  if (move < 0) {
+    const moves = getAvailableMoves(board);
+    move = moves[Math.round(Math.random() * (moves.length - 1))];
+    console.log(move);
+  }
+
+  return move;
 }

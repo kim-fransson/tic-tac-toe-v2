@@ -3,12 +3,20 @@ import Logo from "./assets/logo.svg?react";
 import Switch from "./components/ui/Switch";
 import Button from "./components/ui/Button";
 import { useGameStore } from "./hooks";
+import Slider from "./components/ui/Slider";
+import { difficultyLevels } from "./utils";
 
 export default function NewGameMenu() {
   const [oIsSelected, setOIsSelected] = useState(false);
   const setPlayer1Mark = useGameStore((state) => state.setPlayer1Mark);
   const setIsPlayer2CPU = useGameStore((state) => state.setIsPlayer2CPU);
 
+  const difficulty = useGameStore((state) => state.difficulty);
+  const setDifficulty = useGameStore((state) => state.setDifficulty);
+
+  const difficultyIndex = difficultyLevels.findIndex(
+    (d) => d.label === difficulty.label,
+  );
   function handleNewGameAgainstPlayer() {
     setPlayer1Mark(oIsSelected ? "O" : "X");
   }
@@ -35,6 +43,26 @@ export default function NewGameMenu() {
           REMEMBER: X GOES FIRST
         </small>
       </fieldset>
+
+      <fieldset className="bg-dark-slate-400 inset-shadow-lg w-full space-y-4 rounded-2xl p-5">
+        <h2 className="text-center font-bold tracking-[1px]">
+          PICK CPU DIFFICULTY LEVEL
+        </h2>
+        <Slider
+          step={1}
+          minValue={0}
+          value={difficultyIndex}
+          label={difficulty.label}
+          onChange={(index) => setDifficulty(difficultyLevels[index as number])}
+          maxValue={difficultyLevels.length - 1}
+          aria-label="select cpu difficulty"
+          className="mx-auto"
+        />
+        <small className="block text-center text-sm leading-5 font-medium tracking-[0.875px] uppercase">
+          {difficulty.description}
+        </small>
+      </fieldset>
+
       <Button onPress={handleNewGameAgainstCPU} className="w-full">
         NEW GAME (VS CPU)
       </Button>
