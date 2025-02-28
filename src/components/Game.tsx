@@ -31,15 +31,14 @@ export default function Game() {
   const restartGame = useGameStore((state) => state.restartGame);
   const isPlayer2CPU = useGameStore((state) => state.isPlayer2CPU);
   const difficulty = useGameStore((state) => state.difficulty);
+  const isGameOver = useGameStore((state) => state.isGameOver);
+  const setGameOver = useGameStore((state) => state.setGameOver);
 
-  const [showGameOverModal, setShowGameOverModal] = useState(false);
   const [showRestartGameModal, setShowRestartGameModal] = useState(false);
 
   const currentSquares = history[history.length - 1];
   const currentPlayer = xIsNext ? "X" : "O";
   const winner = calculateWinner(currentSquares);
-  const turns = calculateTurns(currentSquares);
-  const isGameOver = winner !== null || turns === 0;
 
   const [isCPUThinking, setIsCPUThinking] = useState(
     currentPlayer !== player1Mark && isPlayer2CPU,
@@ -52,7 +51,7 @@ export default function Game() {
 
     if (isGameOver) {
       updateScores(winner);
-      setShowGameOverModal(true);
+      setGameOver(true);
     }
     const nextHistory = history.slice(0, currentMove + 1).concat([nextSquares]);
     setHistory(nextHistory);
@@ -71,12 +70,12 @@ export default function Game() {
   }
 
   function handleNextGame() {
-    setShowGameOverModal(false);
+    setGameOver(false);
     newGame();
   }
 
   function handleEndGame() {
-    setShowGameOverModal(false);
+    setGameOver(false);
     endGame();
   }
 
@@ -107,7 +106,7 @@ export default function Game() {
   return (
     <div className="absolute md:top-1/2 md:-translate-y-1/2">
       <GameOverModal
-        isOpen={showGameOverModal}
+        isOpen={isGameOver}
         winner={winner}
         player1mark={player1Mark as Player}
         isPlayer2CPU={isPlayer2CPU}
@@ -136,7 +135,7 @@ export default function Game() {
         player={currentPlayer}
         squares={currentSquares}
         onPlay={handlePlay}
-        isDisabled={showGameOverModal || showRestartGameModal || isCPUThinking}
+        isDisabled={isGameOver || showRestartGameModal || isCPUThinking}
       />
       <div className="mt-5 grid grid-cols-3 gap-5">
         <PointBadge

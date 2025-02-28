@@ -12,6 +12,7 @@ const defaultState = {
   oWins: 0,
   ties: 0,
   difficulty: difficultyLevels[2],
+  isGameOver: false,
 };
 
 interface GameState {
@@ -24,6 +25,7 @@ interface GameState {
   oWins: number;
   ties: number;
   difficulty: Difficulty;
+  isGameOver: boolean;
 
   setHistory: (history: Squares[] | ((prev: Squares[]) => Squares[])) => void;
   setCurrentMove: (currentMove: number | ((prev: number) => number)) => void;
@@ -37,6 +39,7 @@ interface GameState {
   setXWins: (xWins: number | ((prev: number) => number)) => void;
   setOWins: (oWins: number | ((prev: number) => number)) => void;
   setTies: (ties: number | ((prev: number) => number)) => void;
+  setGameOver: (gameOver: boolean | ((prev: boolean) => boolean)) => void;
   setDifficulty: (
     difficulty: Difficulty | ((prev: Difficulty) => Difficulty),
   ) => void;
@@ -91,6 +94,13 @@ export const useGameStore = create<GameState>()(
       setTies: (ties) =>
         set((state) => ({
           ties: typeof ties === "function" ? ties(state.ties) : ties,
+        })),
+      setGameOver: (gameOver) =>
+        set((state) => ({
+          isGameOver:
+            typeof gameOver === "function"
+              ? gameOver(state.isGameOver)
+              : gameOver,
         })),
       setDifficulty: (difficulty) =>
         set((state) => ({
