@@ -1,50 +1,20 @@
-# React + TypeScript + Vite
+# Tic Tac Toe game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project designed from [frontendmentor.io](https://www.frontendmentor.io/)
 
-Currently, two official plugins are available:
+Live demo: [https://tic-tac-toe.made-by-kim.com](https://tic-tac-toe.made-by-kim.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Preview
 
-## Expanding the ESLint configuration
+### Start
+![image](https://github.com/user-attachments/assets/782fa101-d63c-40e1-81f1-d8637a1f2085)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### CPU Difficulty settings
+![image](https://github.com/user-attachments/assets/2079543a-f3d7-48d5-b47f-e4e97eb48ca5)
 
-- Configure the top-level `parserOptions` property like this:
+### Gameplay
+![image](https://github.com/user-attachments/assets/d0b56a70-d1e0-4461-8cbf-29429d51e0f1)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Player wins
+![image](https://github.com/user-attachments/assets/e729599e-dbb7-468f-9897-c6fec47c5129)
